@@ -14,9 +14,6 @@ namespace ApiPush.Push
             var client = new RestClient(url);
             var request = new RestRequest("/", Method.POST);
 
-            // Todo: add auth headers
-            //request.AddHeader("header", "value");
-
             request.AddBody(item);
 
             IRestResponse result = client.Execute(request);

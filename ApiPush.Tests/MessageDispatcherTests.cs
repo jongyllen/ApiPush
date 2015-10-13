@@ -41,7 +41,7 @@ namespace ApiPush.Tests
         }
 
         [Test, ExpectedException]
-        public void throws_whenitem_updated_message_throws()
+        public void throws_when_item_updated_message_throws()
         {
             var message = new ItemUpdated();
             _subscriptionStorage

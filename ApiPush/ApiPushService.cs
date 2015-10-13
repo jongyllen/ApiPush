@@ -1,4 +1,5 @@
 ﻿using ApiPush.Configuration;
+using ApiPush.Infrastructure;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using log4net;
@@ -10,14 +11,12 @@ namespace ApiPush
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiPushService));
         private readonly IApiPushServiceConfiguration _configuration;
-        private readonly IBus _bus;
         private readonly IAutoSubscriberMessageDispatcher _dispatcher;
 
-        public ApiPushService(IApiPushServiceConfiguration configuration, IBus bus, IAutoSubscriberMessageDispatcher dispatcher)
+        public ApiPushService(IApiPushServiceConfiguration configuration, IAutoSubscriberMessageDispatcher dispatcher)
         {
             _configuration = configuration;
             _dispatcher = dispatcher;
-            _bus = bus;
             Log.Info("ApiPushService initialized");
         }
 
@@ -25,7 +24,9 @@ namespace ApiPush
         {
             Log.Info("ApiPushService starting");
 
-            var subscriber = new AutoSubscriber(_bus, "name")
+            var bus = RabbitHutch.CreateBus(_configuration.RabbitMqConnectionString, register => register.Register<IEasyNetQLogger>(_ => new EasyNetQLogger()));
+
+            var subscriber = new AutoSubscriber(bus, "name")
             {
                 ConfigureSubscriptionConfiguration = c =>
                 {

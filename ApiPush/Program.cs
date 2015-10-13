@@ -1,11 +1,9 @@
-﻿using EasyNetQ;
-using log4net.Config;
+﻿using log4net.Config;
 using Topshelf;
 using ApiPush.Configuration;
 using EasyNetQ.AutoSubscribe;
 using ApiPush.Subscriptions;
 using ApiPush.Push;
-using ApiPush.Infrastructure;
 
 namespace ApiPush
 {
@@ -16,7 +14,6 @@ namespace ApiPush
             XmlConfigurator.Configure();
 
             IApiPushServiceConfiguration configuration = new ApiPushServiceConfiguration();
-            IBus bus = ConstructBus(configuration.RabbitMqConnectionString);
             ISubscriptionStorage subscriptionStorage = new ReadonlyJsonSubscriptionStorage();
             IPushSender pushSender = new PushSender();
             IAutoSubscriberMessageDispatcher dispatcher = new MessageDispatcher(subscriptionStorage, pushSender, configuration);
@@ -25,7 +22,7 @@ namespace ApiPush
             {
                 x.Service<ApiPushService>(s =>
                 {
-                    s.ConstructUsing(() => new ApiPushService(configuration, bus, dispatcher));
+                    s.ConstructUsing(() => new ApiPushService(configuration, dispatcher));
                     s.WhenStarted(push => push.Start());
                     s.WhenStopped(push => push.Stop());
                 });
@@ -38,9 +35,5 @@ namespace ApiPush
             });
         }
 
-        private static IBus ConstructBus(string connectionString)
-        {
-            return RabbitHutch.CreateBus(connectionString, register => register.Register<IEasyNetQLogger>(_ => new EasyNetQLogger()));
-        }
     }
 }
