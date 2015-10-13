@@ -1,0 +1,12 @@
+﻿{
+  "SubscriptionList": [
+    {
+      "PartnerId": 1,
+      "Endpoint":  "http://localhost"
+    },
+    {
+      "PartnerId": 2,
+      "Endpoint":  "invalid"
+    }
+  ]
+}
