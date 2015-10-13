@@ -1,11 +1,11 @@
 ﻿using EasyNetQ;
 using log4net.Config;
 using Topshelf;
-using ApiPush.Infrastructure;
 using ApiPush.Configuration;
 using EasyNetQ.AutoSubscribe;
 using ApiPush.Subscriptions;
 using ApiPush.Push;
+using ApiPush.Infrastructure;
 
 namespace ApiPush
 {

@@ -1,4 +1,4 @@
-﻿using ApiPush.Infrastructure;
+﻿using ApiPush.Configuration;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using log4net;

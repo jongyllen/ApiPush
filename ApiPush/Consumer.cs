@@ -1,4 +1,4 @@
-﻿using ApiPush.Infrastructure;
+﻿using ApiPush.Configuration;
 using ApiPush.Messages;
 using ApiPush.Push;
 using ApiPush.Subscriptions;

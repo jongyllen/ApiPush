@@ -94,6 +94,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="subscriptions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,4 +1,4 @@
-﻿namespace ApiPush.Infrastructure
+﻿namespace ApiPush.Configuration
 {
     public interface IApiPushServiceConfiguration
     {
