@@ -1,7 +1,4 @@
-﻿using ApiPush.Configuration;
-using ApiPush.Messages;
-using ApiPush.Push;
-using ApiPush.Subscriptions;
+﻿using ApiPush.Messages;
 using EasyNetQ.AutoSubscribe;
 using log4net;
 using System;
@@ -12,15 +9,11 @@ namespace ApiPush
     public class MessageDispatcher : IAutoSubscriberMessageDispatcher
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(MessageDispatcher));
-        private readonly IApiPushServiceConfiguration _configuration;
-        private readonly IPushSender _pushSender;
-        private readonly ISubscriptionStorage _subscriptions;
+        private IConsume<ItemUpdated> _consumer;
 
-        public MessageDispatcher(ISubscriptionStorage subscriptions, IPushSender pushSender, IApiPushServiceConfiguration configuration)
+        public MessageDispatcher(IConsume<ItemUpdated> consumer)
         {
-            _subscriptions = subscriptions;
-            _pushSender = pushSender;
-            _configuration = configuration;
+            _consumer = consumer;
         }
         public void Dispatch<TMessage, TConsumer>(TMessage message)
             where TMessage : class
@@ -31,11 +24,9 @@ namespace ApiPush
             // We could also skip this dispather completely, the consumer will be used automatically by reflection by easynetq but only using a default parameterless ctor
             if (message is ItemUpdated)
             {
-                Consumer c = new Consumer(_subscriptions, _pushSender, _configuration);
-
                 try
                 {
-                    c.Consume(message as ItemUpdated);
+                    _consumer.Consume(message as ItemUpdated);
                 }
                 catch (Exception ex)
                 {

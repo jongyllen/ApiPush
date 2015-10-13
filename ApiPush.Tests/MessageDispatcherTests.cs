@@ -22,8 +22,8 @@ namespace ApiPush.Tests
             _apiPushServiceConfiguration = Substitute.For<IApiPushServiceConfiguration>();
             _pushSender = Substitute.For<IPushSender>();
             _subscriptionStorage = Substitute.For<ISubscriptionStorage>();
-
-            dispatcher = new MessageDispatcher(_subscriptionStorage, _pushSender, _apiPushServiceConfiguration);
+            Consumer consumer = new Consumer(_subscriptionStorage, _pushSender, _apiPushServiceConfiguration);
+            dispatcher = new MessageDispatcher(consumer);
         }
 
         [Test]

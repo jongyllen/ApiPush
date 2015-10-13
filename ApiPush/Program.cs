@@ -16,7 +16,9 @@ namespace ApiPush
             IApiPushServiceConfiguration configuration = new ApiPushServiceConfiguration();
             ISubscriptionStorage subscriptionStorage = new ReadonlyJsonSubscriptionStorage();
             IPushSender pushSender = new PushSender();
-            IAutoSubscriberMessageDispatcher dispatcher = new MessageDispatcher(subscriptionStorage, pushSender, configuration);
+            Consumer consumer = new Consumer(subscriptionStorage, pushSender, configuration);
+
+            IAutoSubscriberMessageDispatcher dispatcher = new MessageDispatcher(consumer);
 
             HostFactory.Run(x =>
             {
