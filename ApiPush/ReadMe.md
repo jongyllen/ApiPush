@@ -1,6 +1,6 @@
 # ApiPush
 
-This project reads events from a subscription in RabbitMq and pushes them to http endpoints located at Parters
+This project reads events from a subscription in RabbitMq and pushes them to http endpoints located at Partners
 
 ### Internal workings
 **ApiPushService** sets up an **AutoSubscriber** that in its turn uses an **AutoSubscriberMessageDispatcher**. This is EasyNetQ standard.
@@ -19,6 +19,7 @@ Topshelf is used, the application can be run from the command line or installed 
 
 ### Going forward
 There are a few things next up in this project:
+* Get the correct messages from rabbit
 * A real subscription storage, The clients should be able to subscribe via the public Api
 * Security, consider different security aspects, we could use a token in the header and hae shared keys for encrypting messages if needed
 * It would be extremly useful to have an option to drop the messages on Amazon SQS instead of calling http endpoints
