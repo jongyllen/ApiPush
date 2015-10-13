@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyNetQ, Version=0.50.10.403, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="NSubstitute, Version=1.9.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.1.9.1.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
@@ -53,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ApiPushServiceConfigurationTests.cs" />
     <Compile Include="ConsumerTests.cs" />
+    <Compile Include="MessageDispatcherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

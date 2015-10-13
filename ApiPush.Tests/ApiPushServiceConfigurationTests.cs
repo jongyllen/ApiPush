@@ -15,35 +15,35 @@ namespace ApiPush.Tests
         }
 
         [Test]
-        public void CanGetPrefetchCount()
+        public void can_get_prefetch_count()
         {
             ushort prefetchCount = _config.PrefetchCount;
             Assert.That(prefetchCount, Is.Not.Null);
         }
 
         [Test]
-        public void CanGetAutoDelete()
+        public void can_get_auto_delete()
         {
             bool autoDelete = _config.AutoDelete;
             Assert.That(autoDelete, Is.Not.Null);
         }
 
         [Test]
-        public void CanGetRabbitMqConnectionString()
+        public void can_get_rabbitMq_connectionstring()
         {
             string rabbitMqConnectionString = _config.RabbitMqConnectionString;
             Assert.That(rabbitMqConnectionString, Is.Not.Null);
         }
 
         [Test]
-        public void CanGetRetryAttempts()
+        public void can_get_retry_attempts()
         {
             int retryAttempts = _config.RetryAttempts;
             Assert.That(retryAttempts, Is.Not.Null);
         }
 
         [Test]
-        public void CanGetRetryDelayInSeconds()
+        public void can_get_retry_delay_in_seconds()
         {
             int retryDelayInSeconds = _config.RetryAttempts;
             Assert.That(retryDelayInSeconds, Is.Not.Null);
